@@ -103,4 +103,5 @@ hoster-mysite-cpanel
   update existed passwords
 - Color password names by rules in the list view
 - Providing a file with a decryption key and using it instead of manual typing
+- Bundle passwords store into a single archive file
 
