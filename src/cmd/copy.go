@@ -35,6 +35,7 @@ var copyCmd = &cobra.Command{
 			log.Fatal(err.Error())
 		}
 
+        // TODO: Rewrite this command - clear clipboard after some time
 		clipboard.Write(clipboard.FmtText, []byte(message))
 
 	},
