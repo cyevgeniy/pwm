@@ -1,14 +1,14 @@
 package utils
 
 import (
-        "os"
-        "github.com/cyevgeniy/pwm/ui"
+	"github.com/cyevgeniy/pwm/ui"
+	"os"
 )
 
 func CheckErr(e error) {
-    if e != nil {
-        ui.ErrPrintln(e.Error())
+	if e != nil {
+		ui.ErrPrintln(e.Error())
 
-        os.Exit(1)
-    }
+		os.Exit(1)
+	}
 }

@@ -20,20 +20,20 @@ var showCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		s, err := store.GetStore()
 
-        utils.CheckErr(err)
+		utils.CheckErr(err)
 
-        if len(args) == 0 {
-            err := fmt.Errorf("Password file is not specified")
-            utils.CheckErr(err)
-        }
+		if len(args) == 0 {
+			err := fmt.Errorf("Password file is not specified")
+			utils.CheckErr(err)
+		}
 
 		key, err := dialog.PromptForMasterPassword(false)
 
-        utils.CheckErr(err)
+		utils.CheckErr(err)
 
-        message, err := s.Decrypt(args[0], key)
+		message, err := s.Decrypt(args[0], key)
 
-        utils.CheckErr(err)
+		utils.CheckErr(err)
 
 		ui.Println(message)
 
