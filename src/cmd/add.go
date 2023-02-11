@@ -32,7 +32,7 @@ func addFn(cmd *cobra.Command, args []string) {
 
 		// If exists, show alert and exit
 		if s.IsFileExists(fname) {
-            utils.CheckErr("Such password file already exists")
+            utils.CheckErr(errors.New("Such password file already exists"))
 		}
 
 		// If it's not exist, ask for password
@@ -69,5 +69,5 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add new password to the store",
 	Long:  "Add new password to the store. Will not replace already existed passwords",
-	Run: addFn
+	Run: addFn,
 }
