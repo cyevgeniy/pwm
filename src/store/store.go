@@ -55,6 +55,10 @@ func (s Store) ReadFile(fname string) ([]byte, error) {
 	return os.ReadFile(filepath.Join(s.Dir, fname))
 }
 
+func (s Store) ListFiles() ([]os.DirEntry, error) {
+    return os.ReadDir(s.Dir)
+}
+
 func (s Store) Decrypt(fname string, pass []byte) (string, error) {
 	content, err := s.ReadFile(fname)
 
