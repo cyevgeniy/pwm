@@ -2,9 +2,9 @@ package store
 
 import (
 	"errors"
-	"github.com/ProtonMail/gopenpgp/v2/helper"
 	"os"
 	"path/filepath"
+    "github.com/ProtonMail/gopenpgp/v2/helper"
 )
 
 type Store struct {

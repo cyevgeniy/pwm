@@ -8,6 +8,7 @@ import (
 	"github.com/cyevgeniy/pwm/store"
 	"github.com/cyevgeniy/pwm/ui"
 	"github.com/cyevgeniy/pwm/utils"
+	"github.com/cyevgeniy/pwm/pwmerrors"
 	"github.com/spf13/cobra"
 )
 
@@ -20,8 +21,7 @@ func runUpd(cmd *cobra.Command, args []string) {
 	utils.CheckErr(err)
 
 	if len(args) == 0 {
-		err := fmt.Errorf("Password file is not specified")
-		utils.CheckErr(err)
+		utils.CheckErr(pwmerrors.ErrNoPassFileProvided)
 	}
 
 	fname := args[0]
@@ -69,7 +69,7 @@ func runUpd(cmd *cobra.Command, args []string) {
 
 var updCmd = &cobra.Command{
 	Use:   "upd",
-	Short: "Copy password to clipboard",
-	Long:  `Copy password to clipboard`,
+	Short: "Update password or metainformation",
+	Long:  `Update password or metainformation`,
 	Run:   runUpd,
 }

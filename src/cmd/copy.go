@@ -3,9 +3,9 @@ package cmd
 import (
 	"github.com/cyevgeniy/pwm/dialog"
 	"github.com/cyevgeniy/pwm/store"
+	"github.com/cyevgeniy/pwm/utils"
 	"github.com/spf13/cobra"
 	"golang.design/x/clipboard"
-	"log"
 )
 
 func init() {
@@ -14,22 +14,14 @@ func init() {
 
 func runCopy(cmd *cobra.Command, args []string) {
 	s, err := store.GetStore()
-
-	if err != nil {
-		log.Fatal("Can't reach password store")
-	}
+    utils.CheckErr(err)
 
 	key, err := dialog.PromptForMasterPassword(false)
-
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+    utils.CheckErr(err)
 
 	message, err := s.Decrypt(args[0], key)
+    utils.CheckErr(err)
 
-	if err != nil {
-		log.Fatal(err.Error())
-	}
 
 	// TODO: Rewrite this command - clear clipboard after some time
 	clipboard.Write(clipboard.FmtText, []byte(message))

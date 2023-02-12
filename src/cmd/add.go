@@ -8,6 +8,7 @@ import (
 	"github.com/cyevgeniy/pwm/store"
 	"github.com/cyevgeniy/pwm/ui"
 	"github.com/cyevgeniy/pwm/utils"
+	"github.com/cyevgeniy/pwm/pwmerrors"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +25,7 @@ func addFn(cmd *cobra.Command, args []string) {
 		utils.CheckErr(err)
 
 		if len(args) == 0 {
-			utils.CheckErr(errors.New("You should specify filename for password"))
+			utils.CheckErr(pwmerrors.ErrNoPassFileProvided)
 		}
 
         // TODO: Sanitize filename

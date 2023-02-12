@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/cyevgeniy/pwm/dialog"
 	"github.com/cyevgeniy/pwm/store"
 	"github.com/cyevgeniy/pwm/ui"
 	"github.com/cyevgeniy/pwm/utils"
+	"github.com/cyevgeniy/pwm/pwmerrors"
 	"github.com/spf13/cobra"
 )
 
@@ -23,8 +23,7 @@ var showCmd = &cobra.Command{
 		utils.CheckErr(err)
 
 		if len(args) == 0 {
-			err := fmt.Errorf("Password file is not specified")
-			utils.CheckErr(err)
+			utils.CheckErr(pwmerrors.ErrNoPassFileProvided)
 		}
 
 		key, err := dialog.PromptForMasterPassword(false)
