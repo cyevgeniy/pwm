@@ -11,8 +11,9 @@ And I think it can be done better by terminal-based program, though,
 everything else is kind of sucks in terminal-based programs, but that's
 another story.
 
-There is a `pass` bash script on Linux available, and I like the idea behind it
-, but I use Windows, so I've created `pwm`.
+There is the [pass](https://www.passwordstore.org) bash script on
+Linux available, and I like the idea behind it , but I use Windows, so I've
+created `pwm`.
 
 ## How it works
 
