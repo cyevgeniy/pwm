@@ -22,7 +22,6 @@ func runCopy(cmd *cobra.Command, args []string) {
 	message, err := s.Decrypt(args[0], key)
     utils.CheckErr(err)
 
-
 	// TODO: Rewrite this command - clear clipboard after some time
 	clipboard.Write(clipboard.FmtText, []byte(message))
 
@@ -30,7 +29,7 @@ func runCopy(cmd *cobra.Command, args []string) {
 
 var copyCmd = &cobra.Command{
 	Use:   "copy",
-	Short: "Copy password to clipboard",
-	Long:  `Copy password to clipboard`,
+	Short: "Copy password to the clipboard",
+	Long:  `Copy password to the clipboard`,
 	Run:   runCopy,
 }
