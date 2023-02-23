@@ -5,11 +5,10 @@ Pwm is a cross-platform terminal-based password manager.
 ## Passwords store
 
 Each password lies in its own file. Despite files don't have an extension, 
-they are in JSON format. Later this format may be changed
+they are gpg-encrypted. Later this format may be changed
 for something different, but the main rule and promise is:
-the file should be **in a human-readable format first**.
-It means that if you don't have access to Pwm, you can always decrypt your
-passwords with another tool that supports bcrypt.
+if you don't have access to Pwm, you can always decrypt your
+passwords with another tool that supports encryption alghorithm that pwm uses.
 
 All passwords lie in a passwords store. Passwords store is a simple directory.
 This store may have some files required for its work, for example, index file,
@@ -20,6 +19,24 @@ live in `PASSWORD_STORE_DIR/.pwm` directory.
 Password store is created automatically when a user adds password with
 `pwm add` for the first time and it placed in the user's home directory (on Linux)
 or in the `%userprofile%` (on Windows. It's usually looks like `C:\\Users\username`).
+
+## Meta information
+
+Additional metadata is stored in a ".meta" files. These files have the same
+name as password files. Since password and meta files have the same format,
+all commands that can be applied to password files can be applied to metadata
+files as well, for example:
+
+```
+pwm show mail-password
+```
+
+```
+pwm show mail-password.meta
+```
+
+There's no difference in usage, since `mail-password` and `mail-password.meta`
+are just encrypted files.
 
 ##  Usage examples
 
@@ -49,7 +66,7 @@ Enter new password: *******
 Copy password for `mail-password` to clipboard:
 
 ```
-$/home/usrname>pwm mail-password
+$/home/usrname>pwm copy mail-password
 Enter decryption key: ********
 Copied!
 ```
@@ -65,7 +82,7 @@ iamthebest666
 Get list of passwords:
 
 ```
-$/home/usrname>pwm
+$/home/usrname>pwm ls
 asciidoc-book-decrypt
 dropbox
 hoster-mysite-ftp
@@ -83,21 +100,20 @@ music-spotify
 Filter passwords: 
 
 ```
-$/home/usrname>pwm -f mail
+$/home/usrname>pwm ls -f mail
 mail-gmail
 mail-password
 mail-fastmail
 ```
 
 ```
-$/home/usrname>pwm -f mysi
+$/home/usrname>pwm ls -f mysi
 hoster-mysite-ftp
 hoster-mysite-cpanel
 ```
 
 ## Possible issues/ features not designed yet
 
-- Adding additional info for passwords (logins, descriptions etc.)
 - Support for git
 - No one can't decrypt passwords without decryption key, but anyone able to
   update existed passwords
