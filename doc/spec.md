@@ -112,12 +112,15 @@ hoster-mysite-ftp
 hoster-mysite-cpanel
 ```
 
+## Todo 
+
+- [ ] Provide file with a master password via `-i` modifier command
+- [ ] Add command for archiving a whole password store
+- [ ] Add `-g` flag for auto-generating password
+
 ## Possible issues/ features not designed yet
 
 - Support for git
 - No one can't decrypt passwords without decryption key, but anyone able to
   update existed passwords
 - Color password names by rules in the list view
-- Providing a file with a decryption key and using it instead of manual typing
-- Bundle passwords store into a single archive file
-
