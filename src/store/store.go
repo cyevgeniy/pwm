@@ -2,9 +2,9 @@ package store
 
 import (
 	"errors"
+	"github.com/ProtonMail/gopenpgp/v2/helper"
 	"os"
 	"path/filepath"
-    "github.com/ProtonMail/gopenpgp/v2/helper"
 )
 
 type Store struct {
@@ -56,11 +56,11 @@ func (s Store) ReadFile(fname string) ([]byte, error) {
 }
 
 func (s Store) ListFiles() ([]os.DirEntry, error) {
-    return os.ReadDir(s.Dir)
+	return os.ReadDir(s.Dir)
 }
 
 func (s Store) RemoveFile(fname string) error {
-    return os.Remove(filepath.Join(s.Dir, fname))
+	return os.Remove(filepath.Join(s.Dir, fname))
 }
 
 func (s Store) Decrypt(fname string, pass []byte) (string, error) {

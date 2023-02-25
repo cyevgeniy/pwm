@@ -1,10 +1,10 @@
 package dialog
 
 import (
+	"github.com/cyevgeniy/pwm/pwmerrors"
+	"github.com/cyevgeniy/pwm/ui"
+	"golang.org/x/term"
 	"os"
-    "golang.org/x/term"
-    "github.com/cyevgeniy/pwm/pwmerrors"
-    "github.com/cyevgeniy/pwm/ui"
 )
 
 // Prompts for master password.
@@ -32,7 +32,7 @@ func PromptForMasterPassword(duplicate bool) ([]byte, error) {
 }
 
 func PromptForPassword(msg string) ([]byte, error) {
-    ui.Println(msg)
+	ui.Println(msg)
 
 	return term.ReadPassword(int(os.Stdin.Fd()))
 }

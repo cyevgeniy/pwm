@@ -1,11 +1,11 @@
 package cmd
 
 import (
-    "strings"
 	"github.com/cyevgeniy/pwm/store"
 	"github.com/cyevgeniy/pwm/ui"
 	"github.com/cyevgeniy/pwm/utils"
 	"github.com/spf13/cobra"
+	"strings"
 )
 
 var filter string
@@ -16,18 +16,18 @@ func init() {
 }
 
 func runLs(cmd *cobra.Command, args []string) {
-    s, err := store.GetStore()
-    utils.CheckErr(err)
+	s, err := store.GetStore()
+	utils.CheckErr(err)
 
-    files, err := s.ListFiles()
-    utils.CheckErr(err)
+	files, err := s.ListFiles()
+	utils.CheckErr(err)
 
-    for i := range files {
-        fname := files[i].Name()
-        if (filter == "") || (filter != "" && strings.Contains(fname, filter)) {
-            ui.Println(fname)
-        }
-    }
+	for i := range files {
+		fname := files[i].Name()
+		if (filter == "") || (filter != "" && strings.Contains(fname, filter)) {
+			ui.Println(fname)
+		}
+	}
 }
 
 var lsCmd = &cobra.Command{

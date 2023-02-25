@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"github.com/cyevgeniy/pwm/pwmerrors"
 	"github.com/cyevgeniy/pwm/store"
 	"github.com/cyevgeniy/pwm/utils"
-	"github.com/cyevgeniy/pwm/pwmerrors"
 	"github.com/spf13/cobra"
 )
 
@@ -12,14 +12,14 @@ func init() {
 }
 
 func runRm(cmd *cobra.Command, args []string) {
-    s, err := store.GetStore()
-    utils.CheckErr(err)
+	s, err := store.GetStore()
+	utils.CheckErr(err)
 
-    if len(args) == 0 {
-        utils.CheckErr(pwmerrors.ErrNoPassFileProvided)
-    }
+	if len(args) == 0 {
+		utils.CheckErr(pwmerrors.ErrNoPassFileProvided)
+	}
 
-    utils.CheckErr(s.RemoveFile(args[0]))
+	utils.CheckErr(s.RemoveFile(args[0]))
 }
 
 var rmCmd = &cobra.Command{

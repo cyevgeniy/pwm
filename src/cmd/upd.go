@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"github.com/ProtonMail/gopenpgp/v2/helper"
 	"github.com/cyevgeniy/pwm/dialog"
+	"github.com/cyevgeniy/pwm/pwmerrors"
 	"github.com/cyevgeniy/pwm/store"
 	"github.com/cyevgeniy/pwm/ui"
 	"github.com/cyevgeniy/pwm/utils"
-	"github.com/cyevgeniy/pwm/pwmerrors"
 	"github.com/spf13/cobra"
 )
 
