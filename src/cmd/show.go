@@ -1,40 +1,59 @@
 package cmd
 
 import (
-	"github.com/cyevgeniy/pwm/dialog"
-	"github.com/cyevgeniy/pwm/pwmerrors"
-	"github.com/cyevgeniy/pwm/store"
-	"github.com/cyevgeniy/pwm/ui"
-	"github.com/cyevgeniy/pwm/utils"
-	"github.com/spf13/cobra"
+    "github.com/cyevgeniy/pwm/dialog"
+    "github.com/cyevgeniy/pwm/pwmerrors"
+    "github.com/cyevgeniy/pwm/store"
+    "github.com/cyevgeniy/pwm/ui"
+    "github.com/cyevgeniy/pwm/utils"
+    "github.com/spf13/cobra"
 )
 
-func init() {
-	rootCmd.AddCommand(showCmd)
+type showCmd struct {
+    keyFile string
 }
 
-var showCmd = &cobra.Command{
-	Use:   "show",
-	Short: "Show",
-	Long:  "Show password",
-	Run: func(cmd *cobra.Command, args []string) {
-		s, err := store.GetStore()
 
-		utils.CheckErr(err)
+func init() {
+    rootCmd.AddCommand(newShowCmd())
+}
 
-		if len(args) == 0 {
-			utils.CheckErr(pwmerrors.ErrNoPassFileProvided)
-		}
+func newShowCmd() *cobra.Command {
+    cc := &showCmd{}
 
-		key, err := dialog.PromptForMasterPassword(false)
+    cmd := &cobra.Command{
+        Use:   "show",
+        Short: "Show",
+        Long:  "Show password",
+        Run: func(cmd *cobra.Command, args []string) {
+            s, err := store.GetStore()
 
-		utils.CheckErr(err)
+            utils.CheckErr(err)
 
-		message, err := s.Decrypt(args[0], key)
+            if len(args) == 0 {
+                utils.CheckErr(pwmerrors.ErrNoPassFileProvided)
+            }
 
-		utils.CheckErr(err)
+            var key []byte
 
-		ui.Println(message)
+            if cc.keyFile == "" {
+                key, err = dialog.PromptForMasterPassword(false)
+            } else {
+                key, err = utils.ReadKeyFile(cc.keyFile)
+            }
 
-	},
+            utils.CheckErr(err)
+
+            message, err := s.Decrypt(args[0], key)
+
+            utils.CheckErr(err)
+
+            ui.Println(message)
+
+        },
+    }
+
+    cmd.Flags().StringVarP(&cc.keyFile, "input", "i", "", "File with a master password")
+
+    return cmd
 }
